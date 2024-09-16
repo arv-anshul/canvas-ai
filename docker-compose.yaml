@@ -1,0 +1,10 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8080"
+    volumes:
+      - ./backend/app:/app/app
+    environment:
+      GOOGLE_API_KEY:
