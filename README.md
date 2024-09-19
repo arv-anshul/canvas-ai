@@ -12,6 +12,8 @@ Parse and Analyse image containing mathematical expression or problem (it can be
 structured response by leveraging Langchain framework. Also created API out of it using FastAPI which has containerized
 with Docker.
 
+![frontend.png](images/frontend.png)
+
 ## Prompt Examples
 
 ### Example 1
@@ -45,5 +47,5 @@ with Docker.
 - [x] :framed_picture: Analyse one image at a time and return a structured response.
 - [x] :boom: Create API out of it using FastAPI.
 - [x] :whale: Containerize FastAPI app using Docker.
-- [ ] Create frontend using Streamlit or else.
+- [x] :desktop_computer: Create frontend using Streamlit.
 - [ ] Add more prompts to process images in different endpoint.
