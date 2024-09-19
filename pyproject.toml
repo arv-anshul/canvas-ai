@@ -9,7 +9,7 @@ dependencies = []
 dev-dependencies = ["pre-commit>=3.8.0"]
 
 [tool.uv.workspace]
-members = ["backend"]
+members = ["backend", "frontend"]
 
 [tool.ruff]
 target-version = "py311"

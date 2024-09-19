@@ -8,3 +8,12 @@ services:
       - ./backend/app:/app/app
     environment:
       GOOGLE_API_KEY:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend/app:/app/app
+    environment:
+      BACKEND_API_BASE_URL: http://backend:8080/

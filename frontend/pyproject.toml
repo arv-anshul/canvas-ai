@@ -1,0 +1,9 @@
+[project]
+name = "frontend"
+version = "0.0.1"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27.2",
+    "streamlit-drawable-canvas>=0.9.3",
+    "streamlit>=1.38.0",
+]
