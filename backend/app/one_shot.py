@@ -12,22 +12,6 @@ if TYPE_CHECKING:
     from langchain_core.language_models import BaseChatModel
 
 
-ONE_SHOT_ANALYSER_PROMPT = """
-You are an excellent mathematician. I am going to provide you images where some mathematical expressions
-are written or drawn related to mensuration, linear algebra, calculus or BODMAS. So you have solve
-them and return the answer in required JSON format.
-
-{
-  "expression": "the parsed expresion from image",
-  "result": "result of expression (include units if require)",
-  "explanation": "explain the result in less than 50 words"
-}
-
-> DO NOT USE MARKDOWN FORMATTING OR QUOTING.
-> JUST RETURN THE REQUIRED JSON RESPONSE.
-"""
-
-
 class OneShotResponse(BaseModel):
     expression: str = Field(
         description="the parsed expresion from image",
@@ -44,6 +28,21 @@ async def one_shot_image_analyser(
     llm: BaseChatModel,
     image_base64: bytes,
 ) -> OneShotResponse:
+    """
+    You are an excellent mathematician. I am going to provide you images where some
+    mathematical expressions are written or drawn related to mensuration, linear algebra,
+    calculus or BODMAS. So you have solve them and return the answer in required JSON format.
+    Image may contains many mathematical expressions.
+
+    {
+      "expression": "the parsed expresion from image",
+      "result": "result of expression (include units if require)",
+      "explanation": "explain the result in less than 50 words"
+    }
+
+    > DO NOT USE MARKDOWN FORMATTING OR QUOTING.
+    > JUST RETURN THE REQUIRED JSON RESPONSE.
+    """
     prompt = HumanMessage(
         [
             {
@@ -54,7 +53,9 @@ async def one_shot_image_analyser(
     )
 
     chain = llm | JsonOutputParser(pydantic_object=OneShotResponse)
-    response = await chain.ainvoke([SystemMessage(ONE_SHOT_ANALYSER_PROMPT), prompt])
+    response = await chain.ainvoke(
+        [SystemMessage(str(one_shot_image_analyser.__doc__)), prompt],
+    )
     return OneShotResponse(**response)
 
 
